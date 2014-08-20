@@ -14,13 +14,36 @@ var app = {
     },
 
     initialize: function() {
-        this.store = new MemoryStore();
+		var self = this;
+        //this.store = new MemoryStore();
+		this.store = new MemoryStore(function() {
+			self.showAlert('Store Initialized.....', 'Info');
+		});
         $('.search-key').on('keyup', $.proxy(this.findByName, this));
         
         /*this.lsstore = new LocalStorageStore();
         $('.search-key').on('keyup', $.proxy(this.findByName, this));*/
+    },
+    
+    /*
+     * initialize: function() {
+		var self = this;
+		this.store = new MemoryStore(function() {
+		self.showAlert('Store Initialized', 'Info');
+		});
+		$('.search-key').on('keyup', $.proxy(this.findByName, this));
+	}
+     */
+    
+    showAlert: function (message, title) {
+    	if (navigator.notification) {
+    		navigator.notification.alert(message, null, title, 'OK');
+    	} else {
+    		alert(title ? (title + ": " + message) : message);
+    	}
     }
 
 };
 
 app.initialize();
+
