@@ -12,7 +12,20 @@ var app = {
             }
         });
     },
+    
+    
+    
+    /*// Setting up Single Page Application.....
+     */
+    initialize: function() {
+    	var self = this;
+    	this.store = new MemoryStore(function() {
+    		self.renderHomeView();
+    	});
+    },
 
+    /*// Using Native Notification.....
+     * 
     initialize: function() {
 		var self = this;
         //this.store = new MemoryStore();
@@ -21,11 +34,11 @@ var app = {
 		});
         $('.search-key').on('keyup', $.proxy(this.findByName, this));
         
-        /*this.lsstore = new LocalStorageStore();
-        $('.search-key').on('keyup', $.proxy(this.findByName, this));*/
-    },
+        //this.lsstore = new LocalStorageStore();
+        //$('.search-key').on('keyup', $.proxy(this.findByName, this));
+    }*/
     
-    /*
+    /*// Original function.....
      * initialize: function() {
 		var self = this;
 		this.store = new MemoryStore(function() {
@@ -41,6 +54,17 @@ var app = {
     	} else {
     		alert(title ? (title + ": " + message) : message);
     	}
+    },
+    
+    renderHomeView: function() {
+    	var html =
+    	"<div class='header'><h1>Home</h1></div>" +
+    	"<div class='search-view'>" +
+    	"<input class='search-key'/>" +
+    	"<ul class='employee-list'></ul>" +
+    	"</div>"
+    	$('body').html(html);
+    	$('.search-key').on('keyup', $.proxy(this.findByName, this));
     }
 
 };
